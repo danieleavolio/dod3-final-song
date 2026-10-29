@@ -1,0 +1,21 @@
+{
+  "name": "dod3-final-song",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "description": "Drakengard 3 - The Final Song: ricreazione browser del boss ritmico finale (fan project, nessun asset originale)",
+  "scripts": {
+    "chart": "node tools/build-chart.mjs",
+    "chart:helper": "node tools/helper-chart.mjs",
+    "chart:grid": "node tools/beat-grid.mjs",
+    "dev": "vite",
+    "song-server": "node server/song-server.mjs",
+    "build": "npm run chart && tsc --noEmit && vite build",
+    "preview": "vite preview",
+    "typecheck": "tsc --noEmit"
+  },
+  "devDependencies": {
+    "typescript": "5.9.3",
+    "vite": "8.3.5"
+  }
+}

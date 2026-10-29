@@ -1,0 +1,62 @@
+{
+  "source": "official upload, spectral-flux beat comb",
+  "syncMs": 24918,
+  "grid": [
+    {
+      "id": "zero",
+      "name": "ZERO",
+      "bpm": 120.01,
+      "phaseMs": 420,
+      "strength": 0.303,
+      "statedBpm": 120
+    },
+    {
+      "id": "five",
+      "name": "FIVE",
+      "bpm": 131.96,
+      "phaseMs": 340,
+      "strength": 0.414,
+      "statedBpm": 132
+    },
+    {
+      "id": "four",
+      "name": "FOUR",
+      "bpm": 143.98,
+      "phaseMs": 311,
+      "strength": 0.481,
+      "statedBpm": 144
+    },
+    {
+      "id": "three",
+      "name": "THREE",
+      "bpm": 154.01,
+      "phaseMs": 384,
+      "strength": 0.42,
+      "statedBpm": 154
+    },
+    {
+      "id": "two",
+      "name": "TWO",
+      "bpm": 163.97,
+      "phaseMs": 364,
+      "strength": 0.5,
+      "statedBpm": 164
+    },
+    {
+      "id": "one",
+      "name": "ONE",
+      "bpm": 175.97,
+      "phaseMs": 96,
+      "strength": 0.423,
+      "statedBpm": 176
+    },
+    {
+      "id": "all",
+      "name": "ALL",
+      "bpm": 127.99,
+      "phaseMs": 73,
+      "strength": 0.381,
+      "statedBpm": 128
+    }
+  ]
+}

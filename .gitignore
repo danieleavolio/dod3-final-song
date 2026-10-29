@@ -1,0 +1,7 @@
+node_modules/
+dist/
+.playwright-mcp/
+shots/
+*.log
+tools/ytdlp/
+
