@@ -530,7 +530,6 @@ export class UI {
     ctx.clearRect(0, 0, width, height);
 
     const paper = '#0b0a09';
-    const ink = '#ece5d6';
     const faint = 'rgba(236, 229, 214, 0.14)';
     const gold = '#c9a86a';
     const blood = '#c0492f';
