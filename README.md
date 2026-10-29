@@ -1,5 +1,7 @@
 # The Final Song — Drakengard 3 (recreazione web)
 
+Online: https://danieleavolio.github.io/dod3-final-song/ — il download automatico della canzone richiede il server locale; online carica il file audio.
+
 La boss fight ritmica finale di **Drakengard 3** (Branch D, "The Final Song")
 ricreata come gioco **nativo browser**: 234 note + il chime finale, sette sezioni
 (ZERO → FIVE → FOUR → THREE → TWO → ONE → ALL), decelerazione finale a 46 BPM.

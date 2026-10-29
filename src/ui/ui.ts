@@ -196,6 +196,10 @@ export class UI {
     }
   }
 
+  private get isLocal(): boolean {
+    return location.hostname === 'localhost' || location.hostname === '127.0.0.1';
+  }
+
   showSongPrompt(): void {
     this.cleanupCalibration();
     this.screen = 'title';
@@ -203,14 +207,14 @@ export class UI {
       <section class="sheet compact">
         <div class="plate"><span class="no">I</span><span class="label">Canzone</span></div>
         <h2>Prima la musica</h2>
-        <p class="muted">La canzone non è inclusa. Il download usa un server locale e salva il file nel browser.</p>
+        <p class="muted">La canzone non è inclusa. ${this.isLocal ? 'Il download usa il server locale e salva il file nel browser.' : 'Scaricala dal video ufficiale e caricala qui: resta nel tuo browser.'}</p>
         <div class="row column">
-          <button class="btn primary" data-action="download-song">Scarica la canzone</button>
-          <button class="btn ghost" data-action="open-video">Apri il video ufficiale</button>
+          ${this.isLocal ? '<button class="btn primary" data-action="download-song">Scarica la canzone</button>' : ''}
+          <button class="btn ${this.isLocal ? 'ghost' : 'primary'}" data-action="open-video">Apri il video ufficiale</button>
           <button class="btn ghost" data-action="have-file">Ho già il file</button>
           <button class="btn ghost" data-action="dismiss">Non ora</button>
         </div>
-        <p id="song-status" class="audio-status">Download dal video ufficiale, salvataggio locale.</p>
+        <p id="song-status" class="audio-status">${this.isLocal ? 'Download dal video ufficiale, salvataggio locale.' : 'File audio locale, nessun upload.'}</p>
       </section>
     `);
     this.on('[data-action="open-video"]', () => {
@@ -1205,7 +1209,7 @@ export class UI {
             <input id="audio-file" type="file" accept="audio/*,.mp3,.ogg,.wav,.flac,.m4a" />
             <span>Scegli un file</span>
           </label>
-          <button class="btn primary" data-action="download-song">Scarica la canzone</button>
+          ${this.isLocal ? '<button class="btn primary" data-action="download-song">Scarica la canzone</button>' : ''}
         </div>
         ${
           loaded
