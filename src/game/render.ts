@@ -235,6 +235,7 @@ export class Renderer {
 
     if (finaleK < 0.75) this.drawTargetRing(palette, state);
     this.drawNotes(palette, state, finaleK);
+    this.drawForeground(palette, state);
     this.drawFinaleCue(state);
     this.drawBanner(state);
     if (!state.demo) this.drawCountdown(palette, state);
@@ -416,6 +417,60 @@ export class Renderer {
     horizon.addColorStop(1, 'rgba(240, 232, 214, 0.06)');
     c.fillStyle = horizon;
     c.fillRect(0, 760, W, 140);
+  }
+
+  /** Impedimenti in primo piano: colonne e petali che coprono gli anelli. */
+  private drawForeground(palette: Palette, state: RenderState): void {
+    if (state.demo || state.paused) return;
+    const t = state.chartTime;
+    if (t < 0) return;
+    const cycle = 12_000;
+    const sweep = 1350;
+    const phase = ((t % cycle) + cycle) % cycle;
+    if (phase > sweep) return;
+    const k = phase / sweep;
+    const c = this.ctx;
+    const forward = Math.floor(t / cycle) % 2 === 0;
+    const x = forward ? -440 + (W + 880) * k : W + 440 - (W + 880) * k;
+
+    c.save();
+    const veil = c.createLinearGradient(x - 330, 0, x + 330, 0);
+    veil.addColorStop(0, 'rgba(7, 6, 5, 0)');
+    veil.addColorStop(0.24, 'rgba(7, 6, 5, 0.9)');
+    veil.addColorStop(0.76, 'rgba(7, 6, 5, 0.9)');
+    veil.addColorStop(1, 'rgba(7, 6, 5, 0)');
+    c.fillStyle = veil;
+    c.fillRect(x - 330, 0, 660, H);
+
+    c.fillStyle = 'rgba(17, 15, 13, 0.97)';
+    c.beginPath();
+    c.moveTo(x - 96, 0);
+    c.lineTo(x + 96, 0);
+    c.lineTo(x + 62, H);
+    c.lineTo(x - 62, H);
+    c.closePath();
+    c.fill();
+
+    c.strokeStyle = palette.accent;
+    c.globalAlpha = 0.22;
+    c.lineWidth = 1.4;
+    c.beginPath();
+    c.moveTo(x - 96, 0);
+    c.lineTo(x - 62, H);
+    c.moveTo(x + 96, 0);
+    c.lineTo(x + 62, H);
+    c.stroke();
+    c.globalAlpha = 1;
+
+    for (let i = 0; i < 6; i += 1) {
+      const px = x - 150 + i * 60;
+      const py = 90 + ((i * 137 + k * 520) % (H - 200));
+      c.fillStyle = 'rgba(11, 9, 8, 0.9)';
+      c.beginPath();
+      c.ellipse(px, py, 30, 17, i * 0.8 + k * 2.2, 0, TAU);
+      c.fill();
+    }
+    c.restore();
   }
 
   private drawParticles(palette: Palette, reduceMotion: boolean, dt: number): void {
@@ -650,18 +705,33 @@ export class Renderer {
             : clamp(1 - (progress - 1) * 6.6, 0, 1) * 0.75;
         const finalAlpha = alpha * (1 - finaleK);
 
+        // Anello in 3D: parte di taglio (ellisse schiacciata) e si apre fino
+        // al cerchio quando arriva sul bersaglio.
+        const p = clamp(progress, 0, 1);
+        const squash = 0.07 + 0.93 * Math.pow(p, 1.35);
+        const tilt = (1 - p) * 0.16;
+        const wobble = Math.sin(progress * 7 + index * 1.7) * 0.02 * (1 - p);
         c.save();
-        c.globalAlpha = finalAlpha;
+        c.translate(CX, CY);
+        c.rotate(-tilt + wobble);
         c.strokeStyle = palette.ring;
-        c.lineWidth = 3.5;
         c.shadowColor = palette.accent;
         c.shadowBlur = 20;
+        // bordo posteriore (spessore del toro)
+        c.globalAlpha = finalAlpha * 0.38;
+        c.lineWidth = 1.8;
         c.beginPath();
-        c.arc(CX, CY, radius, 0, TAU);
+        c.ellipse(0, -2.5 * (1 - p), radius * 0.995, Math.max(1, radius * squash), 0, 0, TAU);
+        c.stroke();
+        // bordo frontale
+        c.globalAlpha = finalAlpha;
+        c.lineWidth = 3.2;
+        c.beginPath();
+        c.ellipse(0, 2.5 * (1 - p), radius, Math.max(1, radius * squash), 0, 0, TAU);
         c.stroke();
         c.restore();
 
-        this.drawRosette(palette, radius, index, finalAlpha * 0.85);
+        this.drawRosette(palette, radius, index, finalAlpha * 0.85, squash);
       } else if (status === 1) {
         const fade = clamp(1 - delta / 340, 0, 1);
         if (fade <= 0) return;
@@ -746,7 +816,13 @@ export class Renderer {
     }
   }
 
-  private drawRosette(palette: Palette, radius: number, index: number, alpha: number): void {
+  private drawRosette(
+    palette: Palette,
+    radius: number,
+    index: number,
+    alpha: number,
+    squash = 1,
+  ): void {
     const c = this.ctx;
     const rotation = this.clock * 0.0004 + index * 0.8;
     c.save();
@@ -754,13 +830,13 @@ export class Renderer {
     c.globalAlpha = alpha * 0.9;
     for (let i = 0; i < 4; i += 1) {
       const angle = rotation + (i * TAU) / 4;
-      const x = CX + Math.cos(angle) * radius;
-      const y = CY + Math.sin(angle) * radius;
+      const x = CX + Math.cos(angle) * radius * 0.94;
+      const y = CY + Math.sin(angle) * radius * squash * 0.94;
       c.save();
       c.translate(x, y);
       c.rotate(angle + Math.PI / 2);
       c.beginPath();
-      c.ellipse(0, 0, 4.5, 9, 0, 0, TAU);
+      c.ellipse(0, 0, 4.5, 9 * squash, 0, 0, TAU);
       c.fill();
       c.restore();
     }

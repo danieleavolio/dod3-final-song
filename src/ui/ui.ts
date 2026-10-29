@@ -133,26 +133,26 @@ export class UI {
       // storage non disponibile
     }
 
-    // v7: ZERO era indietro; le altre sezioni un filo avanti. Spostamenti lievi.
+    // v8: tutte le sezioni erano un filo in ritardo; anticipo globale lieve.
     try {
-      if (localStorage.getItem('dod3fs.chart.v7') !== '1') {
+      if (localStorage.getItem('dod3fs.chart.v8') !== '1') {
         this.settings = {
           ...this.settings,
           sectionOffsets: {
-            zero: -120,
-            five: -107,
-            four: -158,
-            three: -217,
-            two: -137,
-            one: -151,
-            all: -100,
+            zero: -145,
+            five: -132,
+            four: -183,
+            three: -242,
+            two: -162,
+            one: -176,
+            all: -125,
             finale: 0,
           },
           noteOffsets: {},
         };
         saveSettings(this.settings);
         this.game.setSettings(this.settings);
-        localStorage.setItem('dod3fs.chart.v7', '1');
+        localStorage.setItem('dod3fs.chart.v8', '1');
         this.alignment = null;
       }
     } catch {
