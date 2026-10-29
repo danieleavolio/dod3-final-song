@@ -68,7 +68,7 @@ const W = 1600;
 const H = 900;
 const CX = W / 2;
 const CY = 430;
-const HIT_R = 200;
+const HIT_R = 330;
 const TAU = Math.PI * 2;
 
 const PALETTES: Record<string, Palette> = {
@@ -555,8 +555,10 @@ export class Renderer {
 
     c.save();
     c.translate(CX, CY + 8);
-    c.rotate(Math.sin(t * 0.00011) * 0.05 + t * 0.000015);
-    c.scale(0.94, 0.88);
+    // Vista a ~45 gradi: il fiore gira su se stesso dentro il piano inclinato.
+    c.scale(0.72, 0.92);
+    const spin = Math.sin(t * 0.00011) * 0.04 + t * 0.00018;
+    c.rotate(spin);
 
     const shadow = c.createRadialGradient(0, 0, 12, 0, 0, 205);
     shadow.addColorStop(0, `rgba(18, 14, 12, ${0.3 * alpha})`);
@@ -578,22 +580,28 @@ export class Renderer {
     for (const layer of layers) {
       for (let i = 0; i < layer.n; i += 1) {
         const angle = (i / layer.n) * TAU + layer.rot + Math.sin(t * 0.00035 + i * 1.7) * 0.012;
+        // Profondita': i petali in basso sono vicini, quelli in alto lontani.
+        const depth = -Math.cos(angle + spin);
+        const depthScale = 1 + 0.09 * depth;
+        const depthAlpha = 0.8 + 0.2 * (depth * 0.5 + 0.5);
+        const a = alpha * depthAlpha;
         c.save();
         c.rotate(angle);
+        c.scale(depthScale, depthScale);
         const gradient = c.createLinearGradient(0, 0, 0, -layer.len);
-        gradient.addColorStop(0, `rgba(120, 102, 80, ${layer.dark * alpha})`);
-        gradient.addColorStop(0.38, `rgba(226, 214, 192, ${0.62 * layer.a * alpha})`);
-        gradient.addColorStop(1, `rgba(255, 252, 246, ${0.96 * layer.a * alpha})`);
+        gradient.addColorStop(0, `rgba(120, 102, 80, ${layer.dark * a})`);
+        gradient.addColorStop(0.38, `rgba(226, 214, 192, ${0.62 * layer.a * a})`);
+        gradient.addColorStop(1, `rgba(255, 252, 246, ${0.96 * layer.a * a})`);
         c.fillStyle = gradient;
         c.beginPath();
         c.moveTo(0, 0);
         c.bezierCurveTo(layer.wid, -layer.len * 0.22, layer.wid * 0.85, -layer.len * 0.72, 0, -layer.len);
         c.bezierCurveTo(-layer.wid * 0.85, -layer.len * 0.72, -layer.wid, -layer.len * 0.22, 0, 0);
         c.fill();
-        c.strokeStyle = `rgba(255, 250, 240, ${0.14 * alpha})`;
+        c.strokeStyle = `rgba(255, 250, 240, ${0.14 * a})`;
         c.lineWidth = 1.1;
         c.stroke();
-        c.strokeStyle = `rgba(150, 130, 100, ${0.22 * alpha})`;
+        c.strokeStyle = `rgba(150, 130, 100, ${0.22 * a})`;
         c.lineWidth = 1;
         c.beginPath();
         c.moveTo(0, -layer.len * 0.1);
@@ -894,13 +902,13 @@ export class Renderer {
     c.fillStyle = colors[banner.verdict];
     tracking(c, '5px');
     c.font = '500 24px Cinzel, Georgia, serif';
-    c.fillText(labels[banner.verdict], CX, CY + HIT_R + 92);
+    c.fillText(labels[banner.verdict], CX, CY + HIT_R + 52);
     tracking(c, '0px');
     if (banner.verdict === 'perfect' || banner.verdict === 'good') {
       const delta = Math.round(banner.delta);
       c.globalAlpha = fade * 0.6;
       c.font = 'italic 15px Garamond, Georgia, serif';
-      c.fillText(`${delta > 0 ? '+' : ''}${delta} ms`, CX, CY + HIT_R + 122);
+      c.fillText(`${delta > 0 ? '+' : ''}${delta} ms`, CX, CY + HIT_R + 78);
     }
     c.restore();
   }

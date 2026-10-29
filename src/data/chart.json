@@ -45,7 +45,7 @@
       "id": "two",
       "name": "TWO",
       "bpm": 164,
-      "start": 196500,
+      "start": 196623,
       "end": 223634,
       "count": 31
     },
@@ -54,7 +54,7 @@
       "name": "ONE",
       "bpm": 176,
       "start": 235800,
-      "end": 261639,
+      "end": 261322,
       "count": 34
     },
     {
@@ -293,7 +293,7 @@
       "finale": false
     },
     {
-      "t": 83234,
+      "t": 83370,
       "section": "five",
       "index": 29,
       "finale": false
@@ -353,19 +353,19 @@
       "finale": false
     },
     {
-      "t": 97833,
+      "t": 97718,
       "section": "five",
       "index": 39,
       "finale": false
     },
     {
-      "t": 98266,
+      "t": 98152,
       "section": "five",
       "index": 40,
       "finale": false
     },
     {
-      "t": 98736,
+      "t": 98585,
       "section": "five",
       "index": 41,
       "finale": false
@@ -599,13 +599,13 @@
       "finale": false
     },
     {
-      "t": 180165,
+      "t": 180017,
       "section": "three",
       "index": 80,
       "finale": false
     },
     {
-      "t": 180532,
+      "t": 180384,
       "section": "three",
       "index": 81,
       "finale": false
@@ -617,7 +617,7 @@
       "finale": false
     },
     {
-      "t": 196500,
+      "t": 196623,
       "section": "two",
       "index": 83,
       "finale": false
@@ -647,7 +647,7 @@
       "finale": false
     },
     {
-      "t": 200431,
+      "t": 200627,
       "section": "two",
       "index": 88,
       "finale": false
@@ -737,7 +737,7 @@
       "finale": false
     },
     {
-      "t": 214699,
+      "t": 214842,
       "section": "two",
       "index": 103,
       "finale": false
@@ -773,19 +773,19 @@
       "finale": false
     },
     {
-      "t": 220634,
+      "t": 220447,
       "section": "two",
       "index": 109,
       "finale": false
     },
     {
-      "t": 220866,
+      "t": 220614,
       "section": "two",
       "index": 110,
       "finale": false
     },
     {
-      "t": 221233,
+      "t": 220981,
       "section": "two",
       "index": 111,
       "finale": false
@@ -917,7 +917,7 @@
       "finale": false
     },
     {
-      "t": 249934,
+      "t": 250044,
       "section": "one",
       "index": 133,
       "finale": false
@@ -977,31 +977,31 @@
       "finale": false
     },
     {
-      "t": 260473,
+      "t": 260321,
       "section": "one",
       "index": 143,
       "finale": false
     },
     {
-      "t": 260806,
+      "t": 260655,
       "section": "one",
       "index": 144,
       "finale": false
     },
     {
-      "t": 261173,
+      "t": 260989,
       "section": "one",
       "index": 145,
       "finale": false
     },
     {
-      "t": 261406,
+      "t": 261155,
       "section": "one",
       "index": 146,
       "finale": false
     },
     {
-      "t": 261639,
+      "t": 261322,
       "section": "one",
       "index": 147,
       "finale": false
@@ -1013,7 +1013,7 @@
       "finale": false
     },
     {
-      "t": 282833,
+      "t": 282703,
       "section": "all",
       "index": 149,
       "finale": false
@@ -1085,7 +1085,7 @@
       "finale": false
     },
     {
-      "t": 291514,
+      "t": 291339,
       "section": "all",
       "index": 161,
       "finale": false
@@ -1097,7 +1097,7 @@
       "finale": false
     },
     {
-      "t": 294317,
+      "t": 294167,
       "section": "all",
       "index": 163,
       "finale": false
@@ -1133,7 +1133,7 @@
       "finale": false
     },
     {
-      "t": 298321,
+      "t": 298252,
       "section": "all",
       "index": 169,
       "finale": false
@@ -1151,7 +1151,7 @@
       "finale": false
     },
     {
-      "t": 301992,
+      "t": 301833,
       "section": "all",
       "index": 172,
       "finale": false
@@ -1169,7 +1169,7 @@
       "finale": false
     },
     {
-      "t": 306167,
+      "t": 305993,
       "section": "all",
       "index": 175,
       "finale": false
@@ -1187,7 +1187,7 @@
       "finale": false
     },
     {
-      "t": 309399,
+      "t": 309234,
       "section": "all",
       "index": 178,
       "finale": false
@@ -1217,7 +1217,7 @@
       "finale": false
     },
     {
-      "t": 313269,
+      "t": 313200,
       "section": "all",
       "index": 183,
       "finale": false
@@ -1229,7 +1229,7 @@
       "finale": false
     },
     {
-      "t": 316233,
+      "t": 316070,
       "section": "all",
       "index": 185,
       "finale": false
@@ -1241,7 +1241,7 @@
       "finale": false
     },
     {
-      "t": 317698,
+      "t": 317571,
       "section": "all",
       "index": 187,
       "finale": false
@@ -1301,49 +1301,49 @@
       "finale": false
     },
     {
-      "t": 323713,
+      "t": 323644,
       "section": "all",
       "index": 197,
       "finale": false
     },
     {
-      "t": 324632,
+      "t": 324445,
       "section": "all",
       "index": 198,
       "finale": false
     },
     {
-      "t": 324647,
+      "t": 324578,
       "section": "all",
       "index": 199,
       "finale": false
     },
     {
-      "t": 327434,
+      "t": 327248,
       "section": "all",
       "index": 200,
       "finale": false
     },
     {
-      "t": 327833,
+      "t": 327715,
       "section": "all",
       "index": 201,
       "finale": false
     },
     {
-      "t": 328301,
+      "t": 328182,
       "section": "all",
       "index": 202,
       "finale": false
     },
     {
-      "t": 328766,
+      "t": 328649,
       "section": "all",
       "index": 203,
       "finale": false
     },
     {
-      "t": 331121,
+      "t": 331051,
       "section": "all",
       "index": 204,
       "finale": false
@@ -1403,13 +1403,13 @@
       "finale": false
     },
     {
-      "t": 335873,
+      "t": 335756,
       "section": "all",
       "index": 214,
       "finale": false
     },
     {
-      "t": 336059,
+      "t": 335990,
       "section": "all",
       "index": 215,
       "finale": false
@@ -1421,7 +1421,7 @@
       "finale": false
     },
     {
-      "t": 338667,
+      "t": 338526,
       "section": "all",
       "index": 217,
       "finale": false
@@ -1475,7 +1475,7 @@
       "finale": false
     },
     {
-      "t": 343466,
+      "t": 343397,
       "section": "all",
       "index": 226,
       "finale": false
@@ -1487,7 +1487,7 @@
       "finale": false
     },
     {
-      "t": 347804,
+      "t": 347735,
       "section": "all",
       "index": 228,
       "finale": false
@@ -1505,7 +1505,7 @@
       "finale": false
     },
     {
-      "t": 356146,
+      "t": 356077,
       "section": "all",
       "index": 231,
       "finale": false

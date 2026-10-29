@@ -81,16 +81,17 @@ let outliers = 0;
 for (let k = 0; k < M; k += 1) {
   const p = byIndex.get(k);
   if (p) {
+    const section = chart.notes[k].section;
+    const med = medians.get(section) ?? 0;
     let t = p.dot - anchor;
-    // In ALL i pallini sono fitti e qualche rilevamento si aggancia alla nota
-    // sbagliata: se si discosta troppo dal grezzo (griglia di frame), vince il
-    // grezzo. Fuori da ALL i due concordano e resta il pallino.
-    if (chart.notes[k].section === 'all') {
-      const rawT = rawSong[k] - anchor;
-      if (Math.abs(t - rawT) > 150) {
-        t = rawT;
-        outliers += 1;
-      }
+    // Dove i pallini si sovrappongono (note vicine) il rilevamento sbaglia:
+    // se si discosta troppo dal grezzo, vince il grezzo, riallineato al
+    // timebase locale della sezione. Le prime 4 note restano quelle dei
+    // pallini: i grezzi hanno il salto di fase storico su di loro.
+    const rawT = rawSong[k] - med - anchor;
+    if (k >= 4 && Math.abs(t - rawT) > 110) {
+      t = rawT;
+      outliers += 1;
     }
     times.push(t);
   } else {
